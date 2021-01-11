@@ -30,7 +30,11 @@ int main(void)
 	puts ("输入第一本书名");
 
 	while (s_gets(temp.title,MAXT)!=NULL&&temp.title[0]!='\0') 
-		{
+		{	
+			printf("作者:");
+			fflush(stdin);
+			s_gets(temp.author,MAXT);
+			
 			printf("评分:");
 			scanf("%d",&temp.rating);
 
@@ -60,8 +64,13 @@ int main(void)
 			printf("请输入书名 \n");
 			fflush(stdin);
 			while (s_gets(temp.title,MAXT)!=NULL&&temp.title[0]!='\0') 	//录入图书 
-			{
-				puts("输入评分");
+			{	
+				printf("作者:");
+				
+				fflush(stdin);
+				s_gets(temp.author,MAXT);
+				
+				printf("评分:");
 				scanf("%d",&temp.rating);
 
 				temp.state=1;
@@ -89,19 +98,25 @@ int main(void)
 			break;
 			
 	case '3' : 
-			printf("请输入要修改的书名");
+			puts("请输入要修改的书名");
 			fflush(stdin);
 			s_gets(temp.title,MAXT);
 			
 			char newtitle[MAXT];
+			
 			puts("请输入修改后的书名");	
 			fflush(stdin);
 			s_gets(newtitle,MAXT);
 			
+			puts("请输入修改后的作者");
+			char newauthor[MAXA];
+			fflush(stdin);
+			s_gets(newauthor,MAXT);
+			
 			puts("请输入修改后的评分");
 			scanf("%d",&temp.rating);
 			
-			ChangeBook(&books,temp.title,newtitle,temp.rating); 
+			ChangeBook(&books,temp.title,newtitle,newauthor,temp.rating); 
 			puts("这是您输入的图书,相同内容会打印到程序目录中的1.txt文件里\n");
 			Traverse(&books);
 			break; 
@@ -123,7 +138,7 @@ int main(void)
 			
 			puts("这是您输入的图书,相同内容会打印到程序目录中的1.txt文件里\n");
 			Traverse(&books);
-}
+	}
 	printf("任意键退出"); 
 	getchar();
 	return 0;

@@ -56,12 +56,13 @@ void DeleteBook(const List *plist, char BookName[])
 	pnode->next = temp->next;
 }
 
-void ChangeBook( List *plist, char BookName[],char NewName[], int BookRating)
+void ChangeBook( List *plist, char BookName[],char NewName[], char NewAuthor[],int BookRating)
 {
 	Node *pnode = *plist;
 	while( strcmp(pnode->title,BookName) != 0)
 		pnode = pnode->next;
 	strcpy(pnode->title,NewName);
+	strcpy(pnode->author,NewAuthor);
 	pnode->rating = BookRating;
 }
 
@@ -82,8 +83,8 @@ void Traverse(const List *plist)
 		i++;
 	FILE *fp;
 	fp = fopen ("1.txt","a+");
-	printf("%d£ºbook: %s rating: %d state: %d \n",i,pnode->title,pnode->rating,pnode->state);
-	fprintf(fp,"%d£ºbook: %s rating: %d state: %d \n",i,pnode->title,pnode->rating,pnode->state); 
+	printf("%d£ºbook: %s author:%s rating: %d state: %d \n",i,pnode->title,pnode->author,pnode->rating,pnode->state);
+	fprintf(fp,"%d£ºbook: %s author:%s rating: %d state: %d \n",i,pnode->title,pnode->author,pnode->rating,pnode->state);
 	pnode = pnode->next; 
 	}	
 	
@@ -97,5 +98,5 @@ void SearchTheBook(const List *plist, char BookName[])
 	Node *pnode = *plist;
 	while(strcmp(pnode->title,BookName) != 0)
 		pnode = pnode->next;
-	printf("book: %s rating: %d state: %d \n", pnode->title, pnode->rating, pnode->state);
+	printf("book: %s author:%s rating: %d state: %d \n",pnode->title,pnode->author,pnode->rating,pnode->state);
 }
